@@ -203,7 +203,7 @@ services:
       HIVE_SERVER2_THRIFT_PORT: 10000
       SERVICE_NAME: hiveserver2
       SERVICE_OPTS: "-Xmx1G -Dhive.metastore.uris=thrift://metastore:9083"
-      IS_RESUME: "true"
+      VERBOSE: "true"
     ports:
       - "10000:10000"
       - "10002:10002"
