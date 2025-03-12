@@ -76,17 +76,6 @@ ENV PYSPARK_PYTHON=python3
 ENV SPARK_CONF_DIR=$SPARK_HOME/conf
 ENV PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
 
-# Config
-COPY --chown=$USERNAME:$GROUPNAME conf/core-site.xml $HADOOP_CONF_DIR/
-COPY --chown=$USERNAME:$GROUPNAME conf/hdfs-site.xml $HADOOP_CONF_DIR/
-COPY --chown=$USERNAME:$GROUPNAME conf/yarn-site.xml $HADOOP_CONF_DIR/
-COPY --chown=$USERNAME:$GROUPNAME conf/mapred-site.xml $HADOOP_CONF_DIR/
-COPY --chown=$USERNAME:$GROUPNAME conf/workers $HADOOP_CONF_DIR/
-COPY --chown=$USERNAME:$GROUPNAME conf/spark-defaults.conf $SPARK_CONF_DIR/
-COPY --chown=$USERNAME:$GROUPNAME conf/log4j.properties $SPARK_CONF_DIR/
-
-RUN ln $HADOOP_CONF_DIR/workers $SPARK_CONF_DIR
-
 # Entry point
 COPY entrypoint.sh /usr/local/sbin/entrypoint.sh
 RUN sudo chmod a+x /usr/local/sbin/entrypoint.sh
