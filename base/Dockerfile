@@ -4,10 +4,14 @@ RUN sed -i -e "s|http://archive.ubuntu.com|http://jp.archive.ubuntu.com|g" /etc/
  && apt-get -qq update  \
  && DEBIAN_FRONTEND=noninteractive apt-get -qq install --no-install-recommends \
       sudo \
-      openjdk-8-jdk \
+      openjdk-11-jdk \
       curl \
       gnupg \
       procps \
+      wget \
+      nano \
+      unzip \
+      net-tools \
       python3 \
       python3-pip \
       python-is-python3 \
@@ -27,7 +31,7 @@ RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
 
 USER $USERNAME
 
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 
 # Hadoop
 ARG HADOOP_VERSION=3.3.6
@@ -51,7 +55,7 @@ ENV PATH=$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$PATH
 ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 
 # Spark
-ARG SPARK_VERSION=3.5.3
+ARG SPARK_VERSION=3.5.5
 ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop3.tgz
 ENV SPARK_HOME=/opt/spark
 
@@ -72,29 +76,6 @@ ENV PYSPARK_PYTHON=python3
 ENV SPARK_CONF_DIR=$SPARK_HOME/conf
 ENV PATH=$SPARK_HOME/sbin:$SPARK_HOME/bin:$PATH
 
-# Hive
-ARG HIVE_VERSION=3.1.3
-ARG HIVE_URL=https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
-ENV HIVE_HOME=/opt/hive
-
-RUN set -x \
- && curl -fsSL https://archive.apache.org/dist/hive/KEYS -o /tmp/hive-KEYS  \
- && gpg --import /tmp/hive-KEYS \
- && sudo mkdir $HIVE_HOME \
- && sudo chown $USERNAME:$GROUPNAME -R $HIVE_HOME \
- && curl -fsSL $HIVE_URL -o /tmp/hive.tar.gz \
- && curl -fsSL $HIVE_URL.asc -o /tmp/hive.tar.gz.asc \
- && gpg --verify /tmp/hive.tar.gz.asc \
- && tar -xf /tmp/hive.tar.gz -C $HIVE_HOME --strip-components 1 \
- && rm /tmp/hive*
-
-#RUN sudo rm $HIVE_HOME/lib/guava-*.jar \
-# && sudo cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-*.jar $HIVE_HOME/lib/
-#RUN mv /opt/hive/lib/log4j-slf4j-impl-2.6.2.jar /opt/hive/lib/log4j-slf4j-impl-2.6.2.jar.bak
-
-ENV HIVE_CONF_DIR=$HIVE_HOME/conf
-ENV PATH=$HIVE_HOME/sbin:$HIVE_HOME/bin:$PATH
-
 # Config
 COPY --chown=$USERNAME:$GROUPNAME conf/core-site.xml $HADOOP_CONF_DIR/
 COPY --chown=$USERNAME:$GROUPNAME conf/hdfs-site.xml $HADOOP_CONF_DIR/
@@ -103,10 +84,8 @@ COPY --chown=$USERNAME:$GROUPNAME conf/mapred-site.xml $HADOOP_CONF_DIR/
 COPY --chown=$USERNAME:$GROUPNAME conf/workers $HADOOP_CONF_DIR/
 COPY --chown=$USERNAME:$GROUPNAME conf/spark-defaults.conf $SPARK_CONF_DIR/
 COPY --chown=$USERNAME:$GROUPNAME conf/log4j.properties $SPARK_CONF_DIR/
-COPY --chown=$USERNAME:$GROUPNAME conf/hive-site.xml $HIVE_CONF_DIR/
 
-RUN ln $HADOOP_CONF_DIR/workers $SPARK_CONF_DIR/ \
- && ln $HIVE_CONF_DIR/hive-site.xml $SPARK_CONF_DIR/
+RUN ln $HADOOP_CONF_DIR/workers $SPARK_CONF_DIR
 
 # Entry point
 COPY entrypoint.sh /usr/local/sbin/entrypoint.sh

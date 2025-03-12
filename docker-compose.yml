@@ -20,7 +20,7 @@ services:
       - "history:172.28.1.5"
 
   master:
-    image: hadoop-hive-spark-master
+    image: hadoop-spark-master
     hostname: master
     depends_on:
       - metastore
@@ -48,7 +48,7 @@ services:
       - "history:172.28.1.5"
 
   worker1:
-    image: hadoop-hive-spark-worker
+    image: hadoop-spark-worker
     hostname: worker1
     depends_on:
       - master
@@ -73,7 +73,7 @@ services:
       - "history:172.28.1.5"
 
   worker2:
-    image: hadoop-hive-spark-worker
+    image: hadoop-spark-worker
     hostname: worker2
     depends_on:
       - master
@@ -98,7 +98,7 @@ services:
       - "history:172.28.1.5"
 
   history:
-    image: hadoop-hive-spark-history
+    image: hadoop-spark-history
     hostname: history
     depends_on:
       - master
@@ -122,7 +122,7 @@ services:
       - "worker2:172.28.1.4"
 
   jupyter:
-    image: hadoop-hive-spark-jupyter
+    image: hadoop-spark-jupyter
     hostname: jupyter
     environment:
       SPARK_MASTER_HOST: 172.28.1.2
