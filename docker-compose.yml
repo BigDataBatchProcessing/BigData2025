@@ -37,12 +37,14 @@ services:
       - "10000:10000"
     volumes:
       - namenode:/opt/hadoop/dfs/name
-      - ./conf/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
-      - ./conf/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
-      - ./conf/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
-      - ./conf/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
-      - ./conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
-      - ./conf/log4j.properties:/opt/spark/conf/log4j.properties
+      - ./base/conf/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./base/conf/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./base/conf/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+      - ./base/conf/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
+      - ./base/conf/workers:/opt/hadoop/etc/hadoop/workers
+      - ./base/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
+      - ./base/conf/log4j.properties:/opt/spark/conf/log4j.properties
+      - ./base/conf/workers:/opt/spark/conf/workers
     restart: always
     networks:
       sparknet:
@@ -68,12 +70,14 @@ services:
       - "9864:9864"
     volumes:
       - datanode1:/opt/hadoop/dfs/data
-      - ./conf/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
-      - ./conf/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
-      - ./conf/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
-      - ./conf/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
-      - ./conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
-      - ./conf/log4j.properties:/opt/spark/conf/log4j.properties
+      - ./base/conf/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./base/conf/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./base/conf/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+      - ./base/conf/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
+      - ./base/conf/workers:/opt/hadoop/etc/hadoop/workers
+      - ./base/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
+      - ./base/conf/log4j.properties:/opt/spark/conf/log4j.properties
+      - ./base/conf/workers:/opt/spark/conf/workers
     restart: always
     networks:
       sparknet:
@@ -99,14 +103,14 @@ services:
       - "9865:9864"
     volumes:
       - datanode2:/opt/hadoop/dfs/data
-      - ./conf/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
-      - ./conf/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
-      - ./conf/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
-      - ./conf/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
-      - ./conf/workers:/opt/hadoop/etc/hadoop/workers
-      - ./conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
-      - ./conf/log4j.properties:/opt/spark/conf/log4j.properties
-      - ./conf/workers:/opt/spark/conf/workers
+      - ./base/conf/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./base/conf/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./base/conf/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+      - ./base/conf/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
+      - ./base/conf/workers:/opt/hadoop/etc/hadoop/workers
+      - ./base/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
+      - ./base/conf/log4j.properties:/opt/spark/conf/log4j.properties
+      - ./base/conf/workers:/opt/spark/conf/workers
     restart: always
     networks:
       sparknet:
