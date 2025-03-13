@@ -1,13 +1,10 @@
 FROM hadoop-spark-base
 
-ARG USERNAME=jupyter
-ARG GROUPNAME=jupyter
-ARG UID=1001
-ARG GID=1001
-
 ARG HIVE_VERSION=3.1.3
 ARG HIVE_URL=https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
 ENV HIVE_HOME=/opt/hive
+
+USER root
 
 RUN set -x \
  && wget -q https://archive.apache.org/dist/hive/KEYS -O /tmp/hive-KEYS  \
@@ -19,6 +16,9 @@ RUN set -x \
  && gpg --verify /tmp/hive.tar.gz.asc \
  && tar -xf /tmp/hive.tar.gz -C $HIVE_HOME --strip-components 1 \
  && rm /tmp/hive*
+
+# Przywrócenie użytkownika jupyter
+USER $USERNAME
 
 ENV HIVE_CONF_DIR=$HIVE_HOME/conf
 ENV PATH=$HIVE_HOME/sbin:$HIVE_HOME/bin:$PATH
