@@ -165,6 +165,7 @@ services:
     container_name: hive
     depends_on:
       - postgres
+      - master
     ports:
       - "9083:9083"
       - "10000:10000"
