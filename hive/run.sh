@@ -11,4 +11,4 @@ echo "Starting Hive Metastore..."
 hive --service metastore &
 
 echo "Starting Hive server2..."
-hiveserver2 &
+hiveserver2 --hiveconf hive.root.logger=DEBUG,console &
