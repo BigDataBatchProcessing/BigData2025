@@ -169,6 +169,7 @@ services:
       SPARK_LOCAL_IP: 172.28.1.2
       SPARK_LOCAL_HOSTNAME: master
     ports:
+      - "9083:9083"
       - "10000:10000"
       - "10002:10002"
     volumes:
