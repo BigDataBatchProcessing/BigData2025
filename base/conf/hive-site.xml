@@ -53,6 +53,10 @@
         <value>3000</value>
     </property>
     <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://metastore:9083</value>
+    </property>
+    <property>
         <name>hive.security.authorization.manager</name>
         <value>org.apache.hadoop.hive.ql.security.authorization.DefaultHiveAuthorizationProvider</value>
     </property>
