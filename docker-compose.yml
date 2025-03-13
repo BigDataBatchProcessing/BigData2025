@@ -201,7 +201,7 @@ services:
     container_name: hiveserver2
     environment:
       HIVE_SERVER2_THRIFT_PORT: 10000
-      SERVICE_NAME: hiveserver2
+      # SERVICE_NAME: hiveserver2
       SERVICE_OPTS: "-Xmx1G -Dhive.metastore.uris=thrift://metastore:9083"
       VERBOSE: "true"
       IS_RESUME: "true"
@@ -219,6 +219,7 @@ services:
       - "worker1:172.28.1.3"
       - "worker2:172.28.1.4"
       - "history:172.28.1.5"
+    command: sleep infinity
 
 volumes:
   namenode:
