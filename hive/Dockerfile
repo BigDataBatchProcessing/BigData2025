@@ -22,7 +22,3 @@ RUN set -x \
 
 ENV HIVE_CONF_DIR=$HIVE_HOME/conf
 ENV PATH=$HIVE_HOME/sbin:$HIVE_HOME/bin:$PATH
-
-COPY run.sh /usr/local/sbin/run.sh
-RUN sudo chmod a+x /usr/local/sbin/run.sh
-CMD ["run.sh"]

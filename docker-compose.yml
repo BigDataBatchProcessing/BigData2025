@@ -47,6 +47,8 @@ services:
       - ./base/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
       - ./base/conf/log4j.properties:/opt/spark/conf/log4j.properties
       - ./base/conf/workers:/opt/spark/conf/workers
+      - ./master/run.sh:/usr/local/sbin/run.sh   # Mount run.sh dynamically
+    entrypoint: ["sh", "-c", "chmod +x /usr/local/sbin/run.sh && /usr/local/sbin/run.sh"]
     restart: unless-stopped
     networks:
       bigdata:
@@ -81,6 +83,8 @@ services:
       - ./base/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
       - ./base/conf/log4j.properties:/opt/spark/conf/log4j.properties
       - ./base/conf/workers:/opt/spark/conf/workers
+      - ./worker/run.sh:/usr/local/sbin/run.sh   # Mount run.sh dynamically
+    entrypoint: ["sh", "-c", "chmod +x /usr/local/sbin/run.sh && /usr/local/sbin/run.sh"]
     restart: always
     networks:
       bigdata:
@@ -115,6 +119,8 @@ services:
       - ./base/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
       - ./base/conf/log4j.properties:/opt/spark/conf/log4j.properties
       - ./base/conf/workers:/opt/spark/conf/workers
+      - ./worker/run.sh:/usr/local/sbin/run.sh   # Mount run.sh dynamically
+    entrypoint: ["sh", "-c", "chmod +x /usr/local/sbin/run.sh && /usr/local/sbin/run.sh"]
     restart: always
     networks:
       bigdata:
@@ -149,6 +155,8 @@ services:
       - ./base/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
       - ./base/conf/log4j.properties:/opt/spark/conf/log4j.properties
       - ./base/conf/workers:/opt/spark/conf/workers
+      - ./history/run.sh:/usr/local/sbin/run.sh   # Mount run.sh dynamically
+    entrypoint: ["sh", "-c", "chmod +x /usr/local/sbin/run.sh && /usr/local/sbin/run.sh"]
     restart: always
     networks:
       bigdata:
@@ -180,6 +188,8 @@ services:
       - ./base/conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
       - ./base/conf/log4j.properties:/opt/spark/conf/log4j.properties
       - ./base/conf/workers:/opt/spark/conf/workers
+      - ./hive/run.sh:/usr/local/sbin/run.sh   # Mount run.sh dynamically
+    entrypoint: ["sh", "-c", "chmod +x /usr/local/sbin/run.sh && /usr/local/sbin/run.sh"]
     restart: always
     networks:
       bigdata:
