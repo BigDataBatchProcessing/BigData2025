@@ -184,7 +184,7 @@ services:
       - ./base/conf/workers:/opt/spark/conf/workers
     restart: always
     networks:
-      sparknet:
+      bigdata:
         ipv4_address: 172.28.1.2
     extra_hosts:
       - "postgres:172.28.1.1"
