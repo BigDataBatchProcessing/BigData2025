@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
-if [ ! -f "$NAMEDIR"/initialized ]; then
+if [ ! -f "$HIVE_HOME"/initialized ]; then
   echo "Configuring Hive..."
   hdfs dfs -mkdir -p  /user/hive/warehouse
   schematool -dbType postgres -initSchema
-  touch "$NAMEDIR"/initialized
+  touch "$HIVE_HOME"/initialized
 fi
 
 echo "Starting Hive Metastore..."
