@@ -162,6 +162,7 @@ services:
   hive: 
     image: hadoop-spark-hive
     hostname: hive
+    container_name: hive
     depends_on:
       - postgres
     ports:
