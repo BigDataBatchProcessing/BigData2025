@@ -175,12 +175,13 @@ services:
         -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://postgres:5432/metastore_db
         -Djavax.jdo.option.ConnectionUserName=jupyter
         -Djavax.jdo.option.ConnectionPassword=jupyter
-      HIVE_CUSTOM_CONF_DIR: /hive_custom_conf
+      # HIVE_CUSTOM_CONF_DIR: /hive_custom_conf
     ports:
       - "9083:9083"
     volumes:
       - warehouse:/opt/hive/data/warehouse
-      - ./base/conf:/hive_custom_conf
+      # - ./base/conf:/hive_custom_conf
+      - ./base/conf/hive-site.xml:/opt/hive/conf/hive-site.xml
       - ./base/lib/postgresql-42.3.2.jar:/opt/hive/lib/postgresql-42.3.2.jar
     networks:
       sparknet:
@@ -209,6 +210,7 @@ services:
       - "10000:10000"
       - "10002:10002"
     volumes:
+      - ./base/conf/hive-site.xml:/opt/hive/conf/hive-site.xml
       - warehouse:/opt/hive/data/warehouse
     networks:
       sparknet:
