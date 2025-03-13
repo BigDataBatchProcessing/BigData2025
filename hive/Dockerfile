@@ -9,21 +9,16 @@ ARG GROUPNAME=jupyter
 ARG UID=1001
 ARG GID=1001
 
-USER root
-
 RUN set -x \
  && wget -q https://archive.apache.org/dist/hive/KEYS -O /tmp/hive-KEYS  \
  && gpg --import /tmp/hive-KEYS \
- && mkdir $HIVE_HOME \
- && chown $USERNAME:$GROUPNAME -R $HIVE_HOME \
+ && sudo mkdir $HIVE_HOME \
+ && sudo chown $USERNAME:$GROUPNAME -R $HIVE_HOME \
  && wget -q $HIVE_URL -O /tmp/hive.tar.gz \
  && wget -q $HIVE_URL.asc -O /tmp/hive.tar.gz.asc \
  && gpg --verify /tmp/hive.tar.gz.asc \
  && tar -xf /tmp/hive.tar.gz -C $HIVE_HOME --strip-components 1 \
- && rm /tmp/hive*
-
-# Przywrócenie użytkownika jupyter
-USER $USERNAME
+ && rm /tmp/hive* 
 
 ENV HIVE_CONF_DIR=$HIVE_HOME/conf
 ENV PATH=$HIVE_HOME/sbin:$HIVE_HOME/bin:$PATH
