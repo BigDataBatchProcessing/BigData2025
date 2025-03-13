@@ -234,6 +234,7 @@ volumes:
 
 networks:
   sparknet:
+    name: bigdata
     ipam:
       driver: default
       config:
