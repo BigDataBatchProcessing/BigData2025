@@ -10,7 +10,7 @@ ARG HIVE_URL=https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive
 ENV HIVE_HOME=/opt/hive
 
 RUN set -x \
- && curl -fsSL https://archive.apache.org/dist/hive/KEYS -o /tmp/hive-KEYS  \
+ && wget -q https://archive.apache.org/dist/hive/KEYS -O /tmp/hive-KEYS  \
  && gpg --import /tmp/hive-KEYS \
  && mkdir $HIVE_HOME \
  && chown $USERNAME:$GROUPNAME -R $HIVE_HOME \
