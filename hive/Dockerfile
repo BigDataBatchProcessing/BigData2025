@@ -4,6 +4,11 @@ ARG HIVE_VERSION=3.1.3
 ARG HIVE_URL=https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
 ENV HIVE_HOME=/opt/hive
 
+ARG USERNAME=jupyter
+ARG GROUPNAME=jupyter
+ARG UID=1001
+ARG GID=1001
+
 USER root
 
 RUN set -x \
