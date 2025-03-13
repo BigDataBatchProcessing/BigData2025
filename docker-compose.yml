@@ -164,10 +164,6 @@ services:
     hostname: hive
     depends_on:
       - postgres
-    environment:
-      SPARK_MASTER_HOST: 172.28.1.2
-      SPARK_LOCAL_IP: 172.28.1.2
-      SPARK_LOCAL_HOSTNAME: master
     ports:
       - "9083:9083"
       - "10000:10000"
@@ -185,7 +181,7 @@ services:
     restart: always
     networks:
       bigdata:
-        ipv4_address: 172.28.1.2
+        ipv4_address: 172.28.1.6
     extra_hosts:
       - "postgres:172.28.1.1"
       - "master:172.28.1.2"
