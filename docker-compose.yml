@@ -204,6 +204,7 @@ services:
       SERVICE_NAME: hiveserver2
       SERVICE_OPTS: "-Xmx1G -Dhive.metastore.uris=thrift://metastore:9083"
       VERBOSE: "true"
+      IS_RESUME: "true"
     ports:
       - "10000:10000"
       - "10002:10002"
